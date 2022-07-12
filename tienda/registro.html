@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <title>PRODUCTO DE MASCOTAS</title>
+  </head>
+  <body>
+
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+     <!--menu-->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EB984E  ;">
+        <div class="container-fluid">
+        
+          
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">inicio</a>
+                
+                
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="registro.html">Registro</a>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="stock.html">Stock</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="carrito.html">Carrito</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="monitoreo-compra.html">Monitoreo de compra</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Login.html">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="acercade.html">Acerca de</a>
+              </li>
+              
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div><a ></a></div>
+
+        <!--- scripts -->
+    <script> 
+      $(document).ready(function(){
+        mostrar_usuarios()
+      });
+
+      function mostrar_usuarios(){
+        $.ajax({
+          url: 'http://127.0.0.1:5000/clientes', 
+          type: 'GET',
+          dataType: 'json',
+          success:function(respuesta){
+            console.log(respuesta);
+          }
+        })
+      }
+
+      
+  
+       
+
+          $(document).on('click', '#btnAgregarCliente', function(){
+                  
+                  var rut = $('#inputRut').val();
+                  var dv = $('#inputDv').val();
+                  var primer_nombre = $('#inputPrimerNombre').val();
+                  var segundo_nombre = $('#inputSegundoNombre').val();
+                  var apellido_paterno = $('#inputApellidoPaterno').val();
+                  var apellido_materno = $('#inputApellidoMaterno').val();
+                  var direccion = $('#inputDireccion').val();
+                  var telefono = $('#inputTelefono').val();
+                  var correo = $('#inputCorreo').val();
+                  var estado = $('#inputEstado').val();
+                  
+                  
+                  
+            
+                  $.ajax({
+                      url: 'http://127.0.0.1:5000/clientes',
+                      type: 'POST',
+                      contentType: 'application/json',
+                      data: JSON.stringify({
+                        rut: rut,
+                        dv:dv,
+                        primer_nombre: primer_nombre,
+                        segundo_nombre: segundo_nombre,
+                        apellido_paterno: apellido_paterno,
+                        apellido_materno: apellido_materno,
+                        direccion: direccion,
+                        telefono : telefono,
+                        correo: correo,
+                        estado: estado
+                        //region: region,
+                        //comuna: comuna,
+                        
+                      }),
+                      success:function(respuesta){
+                          console.log(respuesta);
+                      }
+                  })
+          })      
+  
+        
+  
+      
+    </script>
+
+
+    <div class="container">
+
+      <div class="row justify-content-md-center">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Registro de Usuarios</h5>
+
+                <div class="form-row">
+                  <form action="" method="POST" id="form">
+                    
+                    <div class="form-group col-md-6">
+                      <label for="inputRut">Rut sin dígito verificador</label>
+                      <input type="text" class="form-control" id="inputRut">
+                      
+                    </div>  
+                    
+                    <div class="form-group col-md-2">
+                        <label for="inputDv">Dígito verificador</label>
+                        <input type="text" class="form-control" id="inputDv">
+                        
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPrimerNombre">Primer Nombre</label>
+                        <input type="text" class="form-control" id="inputPrimerNombre">
+                        
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputSegundoNombre">Segundo Nombre</label>
+                        <input type="text" class="form-control" id="inputSegundoNombre">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputApellidoPaterno">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="inputApellidoPaterno">
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label for="inputApellidoMaterno">Apellido Materno</label>
+                        <input type="text" class="form-control" id="inputApellidoMaterno">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputDireccion">Dirección</label>
+                      <input type="text" class="form-control" id="inputDireccion" placeholder="Direccion y número #">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="inputTelefono">Telefono</label>
+                      <input type="text" class="form-control" id="inputTelefono" placeholder="569 XXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputCorreo">Correo</label>
+                      <input type="text" class="form-control" id="inputCorreo" placeholder="Alguien@example.com">
+                    </div>
+             
+                    <div class="form-group col-md-2">
+                      <label for="inputEstado">estado</label>
+                      <input type="text" class="form-control" id="inputEstado">
+                      
+                    </div>
+                  
+                                          
+                  
+
+                      
+                  </form>
+                </div>
+                
+
+               
+
+              <button type="submit"  class="btn btn-primary" id="btnAgregarCliente">Registrar</button>
+              <a id="btnLimpiarClienteTabla" class="btn btn-success" onclick="limpiar()">Limpiar</a> 
+              <!--<a id="btnCancelarEdicion" class="btn btn-secondary">Cancelar</a>-->
+            </div>
+          </div>
+        </div>
+
+    
+
+      </div>
+
+    </div>
+
+
+    
+    
+    
+    
+  
+
+
+  
+  </body>
+
+  <footer class="bg-white">
+    <div class="container py-5">
+      <div class="row py-4">
+        
+          <p class="font-italic text-muted">Cuidemos y protejamos la salud de aquellos integrantes de 4 patas en nuestras familias.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Tienda</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="index.html" class="text-muted">INICIO</a></li>
+            <li class="mb-2"><a href="registro.html" class="text-muted">Registro</a></li>
+            <li class="mb-2"><a href="stock.html" class="text-muted">stock</a></li>
+            <li class="mb-2"><a href="carrito.html" class="text-muted">Carrito</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">^^^Subir^^^^</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+          <p class="text-muted mb-4">Quieres recibir Informacion a tu correo?</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Ingrese su email..." aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">© 2022 Duoc All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</html>
+
+
+  <!--<div>Región</div>
+                <div>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="idRegion">
+                  <label for="inputRegion" >...</label>
+                  <option selected>...</option>
+                  <option value="1"> Arica-Parinacota</option>
+                  <option value="2">Tarapacá Antofagasta</option>
+                  <option value="3">Atacama</option>
+                  <option value="4">Coquimbo</option>
+                  <option value="5">Valparaíso</option>
+                  <option value="6">Metropolitana</option>
+                  <option value="7">O'Higgins</option>
+                  <option value="8">Maule</option>
+                  <option value="9">Ñuble</option>
+                  <option value="10">Bío Bío</option>
+                  <option value="11">Araucanía</option>
+                  <option value="12">Los Ríos</option>
+                  <option value="13">Los Lagos</option>
+                  <option value="14">Aysén</option>
+                  <option value="15">Magallanes y Antártica Chilena</option>
+                </select>
+              </div>-->
+
+              <!--<div>Comuna</div>
+              <div>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="idComuna">
+                  <label for="inputComuna" >...</label>
+                  <option selected>...</option>
+                  <option value="1">Santiago</option>
+                  <option value="2">Conchalí</option>
+                  <option value="3">Huechuraba</option>
+                  <option value="4">Independencia</option>
+                  <option value="5">Quilicura</option>
+                  <option value="6">Recoleta</option>
+                  <option value="6">Renca</option>
+                  <option value="8">Las Condes</option>
+                  <option value="9">Lo Barnechea</option>
+                  <option value="10">Providencia</option>
+                  <option value="11">Vitacura</option>
+                  <option value="12">Ñuñoa</option>
+                  <option value="13">Peñalolén</option>
+                  <option value="14">La Florida</option>
+                  <option value="15">La Granja</option>
+                  <option value="16">El Bosque</option>
+                  <option value="17">La Pintana</option>
+                  <option value="18">San Ramón</option>
+                  <option value="19">Lo Espejo</option>
+                  <option value="20">Pedro Aguirre Cerda</option>
+                  <option value="21">San Joaquín</option>
+                  <option value="22">San Miguel</option>
+                  <option value="23">Cerrillos</option>
+                  <option value="24">Maipú</option>
+                  <option value="25">Cerro Navia</option>
+                  <option value="26">Lo Prado</option>
+                  <option value="27">Pudahuel</option>
+                  <option value="28">Quinta Normal</option>
+                </select>
+              </div> 
+
+
+              //añadir usuario a la lista con jquery
+      /*$(document).on('click', '#btnAgregarCliente'), function(){
+        var primer_nombre = $('#inputPrimerNombre').val();
+        var segundo_nombre = $('#inputSegundoNombre').val();
+        var apellido_paterno = $('#inputApellidoPaterno').val();
+        var apellido_materno = $('#inputApellidoMaterno').val();
+        var direccion = $('#inputDireccion').val();
+        var region = $('#inputRegion').val();
+        var comuna = $('#inputComuna').val();
+        var telefono = $('#inputTelefono').val();
+        var correo = $('#inputCorreo').val();
+      }*/
+
+
+      
+      //borrar usuario de la lista con jquery
+      //$(document).on('click', '.btnEliminarUsuario', function(){
+        //eliminar la fila
+        //var idUsuario = $(this).closest('tr').find('th').text();
+
+        //$.ajax({
+          //  url: API_URL+'/usuarios/'+idUsuario,
+            //type: 'DELETE',
+            //dataType: 'json',
+            //data: {
+             //   id:idUsuario
+            //},
+            //success: function(respuesta){
+              //  console.log('Usuario Eliminado')
+                //actualizarTabla()
+          //  }
+
+        //})
+
+
+
+      //}); --> 
